@@ -21,12 +21,16 @@ namespace PuntosExtras
             get { return genero; }
             set { genero = value; }
         }
-        public Persona()
-        {
-            Nombre = string.Empty;
-            Genero = string.Empty;
-           
 
+        public Persona(string nombre, string genero)
+        {
+            this.nombre = nombre;
+            this.genero = genero;
+        }
+
+        public string getDatosCosulta()
+        {
+            return " El Empleado " + Nombre + " Pertenece al genero " + genero +  "\r\n";
         }
     }
 }

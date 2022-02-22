@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace PuntosExtras
 {
-    class Empleados : Persona
+    class Empleados 
     {
         private int edad;
         private int horas;
         private int salario;
         private  String puesto;
+        
+
 
         public  String Puesto
         {
@@ -36,19 +38,19 @@ namespace PuntosExtras
             set { edad = value; }
         }
 
-        public Empleados(string nombre, string genero, int edad, int horas, int salario, string puesto)
+      
+
+        public Empleados(string puesto, int edad, int salario, int horas)
         {
-            
-            this.Nombre = nombre;
-            this.Genero = genero;
-            this.edad = edad;
-            this.horas = horas;
-            this.salario = salario;
             this.puesto = puesto;
+            this.edad = edad;
+            this.salario = salario;
+            this.horas = horas;
         }
+
         public string getDatosEmpleado()
         {
-            return " El Empleado " + Nombre + " Tiene un Salario Inicial de " + Salario + "\r\n";
+            return " El Empleado Tiene un Total de horas: " + horas+ " y gana un salario de  " + Salario + "\r\n";
         }
         public string getDatospuesto()
         {

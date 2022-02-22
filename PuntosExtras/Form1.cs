@@ -13,22 +13,24 @@ namespace PuntosExtras
     public partial class Form1 : Form
     {
         List<Empleados> ListaO = new List<Empleados>();
-        Empleados empleados;
+        List<Persona> ListaP = new List<Persona>();
+       
+      
         public Form1()
         {
             InitializeComponent();
         }
-        public void GuardarPersona()
+
+        public void getdatos()
         {
-            empleados = new Empleados(textNombre.Text, comboGenero.Text, int.Parse(textedad.Text), int.Parse(texthoras.Text), int.Parse(textSalario.Text), comboBox1.Text);
-            ListaO.Add(empleados);
+            IEnumerable<Persona> nomEmp = from nEmp in ListaP select nEmp;
 
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = ListaO;
-
-
-
+            foreach (Persona em in nomEmp)
+            {
+                textConsulta.AppendText(em.getDatosCosulta());
+            }
         }
+
         public void getEmpleado()
         {
             IEnumerable<Empleados> nomEmp = from nEmp in ListaO select nEmp;
@@ -66,7 +68,31 @@ namespace PuntosExtras
 
         private void button2_Click(object sender, EventArgs e)
         {
-            GuardarPersona();
+            string Nombre = textNombre.Text;
+            string Genero = comboGenero.SelectedItem.ToString();
+            string puesto = comboBox1.SelectedItem.ToString();
+            int edad = int.Parse(textedad.Text),
+             salario = int.Parse(textSalario.Text),
+             Horas = int.Parse(texthoras.Text);
+
+
+            Empleados empleados = new Empleados(puesto, edad, salario, Horas);
+            ListaO.Add(empleados);
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = ListaO;
+            dataGridView1.ReadOnly = true;
+
+
+            Persona  persona = new Persona(Nombre, Genero);
+            ListaP.Add(persona);
+
+            dataGridView2.DataSource = null;
+            dataGridView2.DataSource = ListaP;
+            dataGridView2.ReadOnly = true;
+
+
+
             progressBar1.Value = 40;
 
         }
@@ -108,9 +134,10 @@ namespace PuntosExtras
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            textConsulta.Clear();
+           
             getEmpleado();
-            progressBar1.Value = 50; 
+            progressBar1.Value = 50;
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -135,7 +162,7 @@ namespace PuntosExtras
 
         private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
         {
-            textConsulta.Clear();
+            
             progressBar1.Value = 47;
             getPuesto();
         }
@@ -148,6 +175,16 @@ namespace PuntosExtras
         private void button2_MouseClick(object sender, MouseEventArgs e)
         {
           
+        }
+
+        private void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            getdatos();
         }
     }
     
